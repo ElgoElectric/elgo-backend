@@ -1,0 +1,32 @@
+{
+  "name": "elgo-backend",
+  "version": "1.0.0",
+  "description": "Backend for Elgo's customer facing application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "drizzle-kit generate:pg"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElgoElectric/elgo-backend.git"
+  },
+  "author": "Fauzaan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ElgoElectric/elgo-backend/issues"
+  },
+  "homepage": "https://github.com/ElgoElectric/elgo-backend#readme",
+  "dependencies": {
+    "@vercel/postgres": "^0.7.2",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.30.1",
+    "express": "^4.18.3",
+    "pg": "^8.11.3",
+    "postgres": "^3.4.3",
+    "vercel": "^32.3.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.20.14"
+  }
+}

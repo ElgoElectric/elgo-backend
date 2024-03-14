@@ -1,0 +1,127 @@
+{
+  "id": "ab296c2e-3700-493a-8df2-042721f27a24",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "anomaly": {
+      "name": "anomaly",
+      "schema": "",
+      "columns": {
+        "device_label": {
+          "name": "device_label",
+          "type": "char(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "timestamp_start": {
+          "name": "timestamp_start",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timestamp_end": {
+          "name": "timestamp_end",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "datastream": {
+      "name": "datastream",
+      "schema": "",
+      "columns": {
+        "device_label": {
+          "name": "device_label",
+          "type": "char(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "power": {
+          "name": "power",
+          "type": "numeric(10)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timestamp": {
+          "name": "timestamp",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "on_off": {
+          "name": "on_off",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "device": {
+      "name": "device",
+      "schema": "",
+      "columns": {
+        "device_label": {
+          "name": "device_label",
+          "type": "char(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "char(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "name": {
+          "name": "name",
+          "type": "char(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "char(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "char(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
