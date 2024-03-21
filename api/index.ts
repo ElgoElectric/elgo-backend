@@ -20,8 +20,8 @@ app.get("/users", function (req, res) {
 });
 
 /*
-Make requests to port 3000 only. 
+Make requests to port 3000 only.
 */
-app.listen(8080, () => console.log("Server ready on port 3000."));
+app.listen(8080, () => console.log("Server ready on port 3001."));
 
 module.exports = app;
