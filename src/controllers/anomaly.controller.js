@@ -10,7 +10,7 @@ exports.createAnomaly = async (req, res) => {
     console.error("❌ Error creating anomaly:", error);
     res
       .status(500)
-      .json({ message: "❌ Error creating anomaly, Request body was: " + req.body, error: error.message });
+      .json({ message: "❌ Error creating anomaly, Request body was: " + JSON.stringify(req.body), error: error.message });
   }
 };
 
