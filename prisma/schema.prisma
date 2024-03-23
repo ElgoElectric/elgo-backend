@@ -1,0 +1,55 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Anomaly {
+  id              Int      @id @default(autoincrement())
+  device_label    String   @db.VarChar(256)
+  timestamp_start DateTime @db.Timestamp(0)
+  timestamp_end   DateTime? @db.Timestamp(0)
+  valid_anomaly   Boolean  // Added boolean field for valid anomaly indicator
+  action_taken    Boolean  // Added boolean field for action taken indicator
+  device          Device   @relation(fields: [device_label], references: [device_label])
+}
+
+
+model Datastream {
+  id            Int      @id @default(autoincrement())
+  device_label  String   @db.VarChar(256)
+  power         Decimal
+  timestamp     DateTime @db.Timestamp(0)
+  on_off        Boolean
+  device        Device   @relation(fields: [device_label], references: [device_label])
+}
+
+model Device {
+  id            Int          @id @default(autoincrement())
+  device_label  String       @db.VarChar(256) @unique
+  user_id       String       @db.VarChar(256)
+  user          User         @relation(fields: [user_id], references: [user_id])
+  anomalies     Anomaly[]
+  datastreams   Datastream[]
+  sagemakeranomalies SagemakerAnomaly[]
+}
+
+model SagemakerAnomaly {
+  id            Int      @id @default(autoincrement())
+  device_label  String   @db.VarChar(256)
+  power         Decimal
+  timestamp     DateTime @db.Timestamp(0)
+  isofAnomaly   Boolean
+  lstmAnomaly   Boolean
+  device        Device   @relation(fields: [device_label], references: [device_label])
+}
+
+model User {
+  user_id  String   @id @db.VarChar(256)
+  name     String   @db.VarChar(256)
+  email    String?  @db.VarChar(256)
+  devices  Device[]
+}
