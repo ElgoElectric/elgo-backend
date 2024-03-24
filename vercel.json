@@ -2,30 +2,30 @@
     "version": 2,
     "builds": [
       {
-        "src": "./api/index.js",
+        "src": "/api/index.js",
         "use": "@vercel/node"
       }
     ],
     "rewrites": [
       {
         "source": "/anomalies/(.*)",
-        "destination": "./api/index.js"
+        "destination": "/api/index.js"
       },
       {
         "source": "/devices/(.*)",
-        "destination": "./api/index.js"
+        "destination": "/api/index.js"
       },
       {
         "source": "/users/(.*)",
-        "destination": "./api/index.js"
+        "destination": "/api/index.js"
       },
       {
         "source": "/sagemakeranomaly/(.*)",
-        "destination": "./api/index.js"
+        "destination": "/api/index.js"
       },
       {
         "source": "/(.*)",
-        "destination": "./api/index.js"
+        "destination": "/api/index.js"
       }
     ],
     "crons": [
