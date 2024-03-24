@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   console.log("Running the anomaly check task");
 
   try {
@@ -55,4 +55,4 @@ export default async function handler(req, res) {
     console.error("❌ Error occurred during the anomaly check:", error);
     res.status(500).json({ error: "Internal server error" });
   }
-}
+};

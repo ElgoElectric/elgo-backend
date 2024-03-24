@@ -4,7 +4,7 @@ const deviceRouter = require("../src/routes/device.routes.js");
 const userRouter = require("../src/routes/user.routes.js");
 const sagemakeranomalyRouter = require("../src/routes/sagemakeranomaly.routes.js");
 const app = express();
-const handler = require("./cronTest.js");
+const handler = require("./cronAnomaly.js");
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
