@@ -26,8 +26,8 @@
       ],
     "crons": [
       {
-        "path": "/api/cronAnomaly.js",
-        "schedule": "0 12 * * *"
+        "path": "/api/cronTest.js",
+        "schedule": "* * * * *"
       }
     ]
   }

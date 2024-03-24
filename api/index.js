@@ -25,6 +25,7 @@ app.use("/users", userRouter);
 app.use("/sagemakerAnomalies", sagemakeranomalyRouter);
 
 app.get("/", (req, res) => {
+  console.info("INFO: Server Started Successfully");
   res.json({ "message:": "Welcome to Elgo API" });
 });
 
