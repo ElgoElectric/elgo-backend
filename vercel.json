@@ -30,7 +30,7 @@
     ],
     "crons": [
       {
-        "path": "./api/cronAnomaly.js",
+        "path": "/api/cronAnomaly.js",
         "schedule": "0 12 * * *"
       }
     ]
