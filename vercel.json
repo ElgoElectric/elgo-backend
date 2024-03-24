@@ -6,27 +6,27 @@
         "use": "@vercel/node"
       }
     ],
-    "routes": [
+    "rewrites": [
       {
-        "src": "/anomalies(.*)",
-        "dest": "/api/index.js"
+        "source": "/anomalies/:path*",
+        "destination": "/api/index.js"
       },
       {
-        "src": "/test",
-        "dest": "/api/index.js"
+        "source": "/test",
+        "destination": "/api/index.js"
       },
       {
-        "src": "/",
-        "dest": "/api/index.js"
+        "source": "/",
+        "destination": "/api/index.js"
       },
       {
-        "src": "/(.*)",
-        "dest": "/api/index.js"
+        "source": "/:path*",
+        "destination": "/api/index.js"
       }
     ],
     "crons": [
       {
-        "path": "/api/cronAnomaly.js",
+        "path": "/api/cronAnomaly",
         "schedule": "*/30 * * * *"
       }
     ]
