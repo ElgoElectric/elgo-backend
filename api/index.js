@@ -23,7 +23,7 @@ app.use("/anomalies", anomalyRouter);
 app.use("/devices", deviceRouter);
 app.use("/users", userRouter);
 app.use("/sagemakerAnomalies", sagemakeranomalyRouter);
-//app.get("/api/cron", handler);
+app.get("/anomalyChecker/cron", handler);
 
 app.get("/", (req, res) => {
   console.info("INFO: Server Started Successfully");
