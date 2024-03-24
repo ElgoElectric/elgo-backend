@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const sagemakerAnomalyController = require("../controllers/sagemakerAnomaly.controller.js"); // Adjust the path as needed
+const sagemakerAnomalyController = require("../controllers/sagemakeranomaly.controller.js"); // Adjust the path as needed
 
 // Create a new SagemakerAnomaly record
 router.post("/create", sagemakerAnomalyController.createSagemakerAnomaly);
