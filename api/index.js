@@ -4,7 +4,7 @@ const deviceRouter = require("../src/routes/device.routes.js");
 const userRouter = require("../src/routes/user.routes.js");
 const sagemakeranomalyRouter = require("../src/routes/sagemakeranomaly.routes.js");
 const app = express();
-const cronHandler = require("./cronTest.js");
+const handler = require("./cronTest.js");
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -23,7 +23,7 @@ app.use("/anomalies", anomalyRouter);
 app.use("/devices", deviceRouter);
 app.use("/users", userRouter);
 app.use("/sagemakerAnomalies", sagemakeranomalyRouter);
-app.get("/api/cron", cronHandler);
+//app.get("/api/cron", handler);
 
 app.get("/", (req, res) => {
   console.info("INFO: Server Started Successfully");
