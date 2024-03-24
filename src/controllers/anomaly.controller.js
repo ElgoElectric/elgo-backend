@@ -3,14 +3,14 @@ const anomalyService = require("../services/anomaly.service.js");
 exports.createAnomaly = async (req, res) => {
   console.log("Received request body:", req.body);
   try {
-    const anomalyData = req.body;
+    const anomalyData = JSON.parse(req.body);
     const newAnomaly = await anomalyService.createAnomaly(anomalyData);
     res.json(newAnomaly);
   } catch (error) {
     console.error("❌ Error creating anomaly:", error);
     res
       .status(500)
-      .json({ message: "❌ Error creating anomaly", error: error.message });
+      .json({ message: "❌ Error creating anomaly, Request body was: " + JSON.stringify(req.body), error: error.message });
   }
 };
 
