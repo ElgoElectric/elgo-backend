@@ -6,28 +6,24 @@
         "use": "@vercel/node"
       }
     ],
-    "rewrites": [
-      {
-        "source": "/anomalies/(.*)",
-        "destination": "/api/index.js"
-      },
-      {
-        "source": "/devices/(.*)",
-        "destination": "/api/index.js"
-      },
-      {
-        "source": "/users/(.*)",
-        "destination": "/api/index.js"
-      },
-      {
-        "source": "/sagemakeranomaly/(.*)",
-        "destination": "/api/index.js"
-      },
-      {
-        "source": "/(.*)",
-        "destination": "/api/index.js"
-      }
-    ],
+    "routes": [
+        {
+          "src": "/anomalies(.*)",
+          "dest": "api/index.js"
+        },
+        {
+          "src": "/test",
+          "dest":"api/index.js"
+        },
+        {
+          "src": "/",
+          "dest": "api/index.js"
+        },
+        {
+          "src": "/(.*)",
+          "dest": "api/index.js"
+        }
+      ],
     "crons": [
       {
         "path": "/api/cronAnomaly.js",
