@@ -3,7 +3,21 @@ const anomalyService = require("../services/anomaly.service.js");
 exports.createAnomaly = async (req, res) => {
   console.log("Received request body:", req.body);
   try {
-    const anomalyData = req.body;
+    const anomalyData = { ...req.body };
+    const convertTimestamp = (timestamp) => {
+      return `${timestamp}.000Z`;
+    };
+
+    if (anomalyData.timestamp_start) {
+      anomalyData.timestamp_start = convertTimestamp(
+        anomalyData.timestamp_start
+      );
+    }
+    if (anomalyData.timestamp_end) {
+      anomalyData.timestamp_end = convertTimestamp(anomalyData.timestamp_end);
+    }
+
+    // Proceed to create anomaly with the reformatted timestamp
     const newAnomaly = await anomalyService.createAnomaly(anomalyData);
     res.json(newAnomaly);
   } catch (error) {
