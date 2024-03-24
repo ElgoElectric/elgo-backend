@@ -27,7 +27,7 @@
     "crons": [
       {
         "path": "/anomalyChecker/cron",
-        "schedule": "5 8 * * *"
+        "schedule": "*/30 * * * *"
       }
     ]
   }
