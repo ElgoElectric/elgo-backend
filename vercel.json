@@ -26,7 +26,7 @@
       ],
     "crons": [
       {
-        "path": "/api/cron",
+        "path": "/anomalyChecker/cron",
         "schedule": "5 8 * * *"
       }
     ]
