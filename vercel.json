@@ -1,27 +1,9 @@
 {
-    "version": 2,
+    "version": 3,
     "builds": [
       {
-        "src": "api/index.js",
+        "src": "index.js",
         "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/anomalies(.*)",
-        "dest": "api/index.js"
-      },
-      {
-        "src": "/test",
-        "dest": "api/index.js"
-      },
-      {
-        "src": "/",
-        "dest": "api/index.js"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "api/index.js"
       }
     ],
     "headers": [
@@ -38,13 +20,31 @@
           },
           {
             "key": "Access-Control-Allow-Methods",
-            "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+            "value": "GET, OPTIONS, PATCH, DELETE, POST, PUT"
           },
           {
             "key": "Access-Control-Allow-Headers",
-            "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+            "value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
           }
         ]
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/anomalies/(.*)",
+        "destination": "/api/index.js"
+      },
+      {
+        "source": "/devices/(.*)",
+        "destination": "/api/index.js"
+      },
+      {
+        "source": "/users/(.*)",
+        "destination": "/api/index.js"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/api/index.js"
       }
     ]
   }
