@@ -8,25 +8,29 @@
     ],
     "rewrites": [
       {
-        "source": "/anomalies/:path*",
+        "source": "/anomalies/(.*)",
         "destination": "/api/index.js"
       },
       {
-        "source": "/test",
+        "source": "/devices/(.*)",
         "destination": "/api/index.js"
       },
       {
-        "source": "/",
+        "source": "/users/(.*)",
         "destination": "/api/index.js"
       },
       {
-        "source": "/:path*",
+        "source": "/sagemakeranomaly/(.*)",
+        "destination": "/api/index.js"
+      },
+      {
+        "source": "/(.*)",
         "destination": "/api/index.js"
       }
     ],
     "crons": [
       {
-        "path": "/api/cronAnomaly",
+        "path": "/api/cron",
         "schedule": "*/30 * * * *"
       }
     ]
