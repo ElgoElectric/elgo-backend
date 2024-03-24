@@ -6,7 +6,6 @@ exports.createSagemakerAnomaly = async (data) => {
     data: data,
   });
 };
-s;
 
 // Get a SagemakerAnomaly by ID
 exports.getSagemakerAnomalyById = async (id) => {

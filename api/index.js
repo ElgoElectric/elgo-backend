@@ -22,7 +22,7 @@ app.use(express.json());
 app.use("/anomalies", anomalyRouter);
 app.use("/devices", deviceRouter);
 app.use("/users", userRouter);
-app.use("/sagemakeranomaly", sagemakeranomalyRouter);
+app.use("/sagemakerAnomalies", sagemakeranomalyRouter);
 
 app.get("/", (req, res) => {
   res.json({ "message:": "Welcome to Elgo API" });
