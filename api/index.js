@@ -2,6 +2,7 @@ const express = require("express");
 const anomalyRouter = require("../src/routes/anomaly.routes.js"); // make sure the path points to your anomaly router file
 const deviceRouter = require("../src/routes/device.routes.js");
 const userRouter = require("../src/routes/user.routes.js");
+const sagemakeranomalyRouter = require("../src/routes/sagemakeranomaly.routes.js");
 const app = express();
 
 app.use((req, res, next) => {
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use("/anomalies", anomalyRouter);
 app.use("/devices", deviceRouter);
 app.use("/users", userRouter);
+app.use("/sagemakeranomaly", sagemakeranomalyRouter);
 
 app.get("/", (req, res) => {
   res.json({ "message:": "Welcome to Elgo API" });
@@ -39,4 +41,5 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
+// Export the server for Vercel
 module.exports = app;

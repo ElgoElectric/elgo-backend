@@ -19,6 +19,12 @@ exports.updateUser = async (userId, updateData) => {
   });
 };
 
+exports.findUserByEmail = async (email) => {
+  return prisma.user.findUnique({
+    where: { email: email },
+  });
+};
+
 exports.deleteUser = async (userId) => {
   return prisma.user.delete({
     where: { user_id: userId },

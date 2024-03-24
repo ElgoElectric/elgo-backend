@@ -2,6 +2,12 @@ const userService = require("../services/user.service.js"); // Adjust path as ne
 
 exports.createUser = async (req, res) => {
   try {
+    const existingUser = await userService.findUserByEmail(req.body.email);
+    if (existingUser) {
+      return res
+        .status(409)
+        .json({ message: "❌ User with this email already exists." });
+    }
     const user = await userService.createUser(req.body);
     res.status(201).json(user);
   } catch (error) {
