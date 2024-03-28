@@ -2,6 +2,7 @@ const express = require("express");
 const anomalyRouter = require("../src/routes/anomaly.routes.js"); // make sure the path points to your anomaly router file
 const deviceRouter = require("../src/routes/device.routes.js");
 const userRouter = require("../src/routes/user.routes.js");
+const datastreamRouter = require("../src/routes/datastream.routes.js");
 const sagemakeranomalyRouter = require("../src/routes/sagemakeranomaly.routes.js");
 const app = express();
 const handler = require("../cron/cronAnomaly.js");
@@ -24,6 +25,7 @@ app.use("/devices", deviceRouter);
 app.use("/users", userRouter);
 app.use("/sagemakerAnomalies", sagemakeranomalyRouter);
 app.get("/anomalyChecker/cron", handler);
+app.use("/datastreams", datastreamRouter);
 
 app.get("/", (req, res) => {
   console.info("INFO: Server Started Successfully");

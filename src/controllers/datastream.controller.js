@@ -23,12 +23,10 @@ exports.getDatastreamById = async (req, res) => {
       res.status(404).json({ message: "Datastream not found" });
     }
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "❌ Error retrieving datastream",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "❌ Error retrieving datastream",
+      error: error.message,
+    });
   }
 };
 
@@ -85,6 +83,24 @@ exports.getDatastreamsByTimestampRange = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "❌ Error retrieving datastreams by timestamp range",
+      error: error.message,
+    });
+  }
+};
+
+exports.getEnergyConsumptionByDevice = async (req, res) => {
+  try {
+    const { deviceLabel } = req.params; // Extract deviceLabel from URL parameters
+    const totalEnergyKWh = await datastreamService.calculateEnergyConsumption(
+      deviceLabel
+    );
+    res.json({
+      deviceLabel,
+      totalEnergyKWh: totalEnergyKWh.toFixed(4) + " kWh",
+    }); // Format output
+  } catch (error) {
+    res.status(500).json({
+      message: "❌ Error calculating energy consumption",
       error: error.message,
     });
   }

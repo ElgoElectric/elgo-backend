@@ -7,5 +7,6 @@ router.get("/:userId", userController.getUserById);
 router.patch("/:userId", userController.updateUser);
 router.get("/", userController.listAllUsers);
 router.get("/:userId/devices", userController.getDevicesByUserId);
+router.delete("/:userId", userController.deleteUser);
 
 module.exports = router;

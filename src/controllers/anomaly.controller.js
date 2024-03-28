@@ -74,3 +74,50 @@ exports.getAllAnomalies = async (req, res) => {
       .json({ message: "❌ Error retrieving anomalies", error: error.message });
   }
 };
+
+exports.listAnomaliesByDevice = async (req, res) => {
+  try {
+    const { deviceLabel } = req.params;
+    const anomalies = await anomalyService.listAnomaliesByDeviceLabel(
+      deviceLabel
+    );
+    res.json(anomalies);
+  } catch (error) {
+    res.status(500).json({
+      message: "❌ Error retrieving anomalies by device label",
+      error: error.message,
+    });
+  }
+};
+
+exports.listAnomaliesLast24Hours = async (req, res) => {
+  try {
+    const { deviceLabel } = req.params;
+    const anomalies = await anomalyService.listAnomaliesByTimeFrame(
+      deviceLabel,
+      24
+    );
+    res.json(anomalies);
+  } catch (error) {
+    res.status(500).json({
+      message: "❌ Error retrieving anomalies for the last 24 hours",
+      error: error.message,
+    });
+  }
+};
+
+exports.listAnomaliesLast48Hours = async (req, res) => {
+  try {
+    const { deviceLabel } = req.params;
+    const anomalies = await anomalyService.listAnomaliesByTimeFrame(
+      deviceLabel,
+      48
+    );
+    res.json(anomalies);
+  } catch (error) {
+    res.status(500).json({
+      message: "❌ Error retrieving anomalies for the last 48 hours",
+      error: error.message,
+    });
+  }
+};

@@ -56,6 +56,22 @@ exports.updateActionTaken = async (id, actionTaken) => {
   });
 };
 
+exports.listAnomaliesByTimeFrame = async (deviceLabel, hours) => {
+  const endDate = new Date();
+  const startDate = new Date();
+  startDate.setHours(endDate.getHours() - hours);
+
+  return prisma.anomaly.findMany({
+    where: {
+      device_label: deviceLabel,
+      timestamp_start: {
+        gte: startDate,
+        lte: endDate,
+      },
+    },
+  });
+};
+
 exports.listAllAnomalies = async () => {
   return prisma.anomaly.findMany();
 };

@@ -1,20 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const sagemakerAnomalyController = require("../controllers/sagemakeranomaly.controller.js"); // Adjust the path as needed
+// Device controller
+const deviceController = require("../controllers/device.controller.js"); // Adjust the path as needed
 
-// Create a new SagemakerAnomaly record
-router.post("/create", sagemakerAnomalyController.createSagemakerAnomaly);
-
-// Get a specific SagemakerAnomaly record by ID
-router.get("/:id", sagemakerAnomalyController.getSagemakerAnomalyById);
-
-// List all SagemakerAnomaly records
-router.get("/", sagemakerAnomalyController.listSagemakerAnomalies);
-
-// Update a SagemakerAnomaly record by ID
-router.patch("/:id", sagemakerAnomalyController.updateSagemakerAnomaly);
-
-// Delete a SagemakerAnomaly record by ID
-router.delete("/:id", sagemakerAnomalyController.deleteSagemakerAnomaly);
+// Device routes
+router.post("/createDevice", deviceController.createDevice); // Create a new device
+router.get("/:deviceLabel", deviceController.getDeviceByLabel); // Get a specific device by device label
+router.patch("/:deviceLabel", deviceController.updateDevice); // Update a device by device label
+router.delete("/:deviceLabel", deviceController.deleteDevice); // Delete a device by device label
+router.get("/", deviceController.listAllDevices); // List all devices
 
 module.exports = router;

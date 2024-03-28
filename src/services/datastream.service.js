@@ -1,6 +1,5 @@
 // services.js
-const prisma = require("../lib/prisma"); // Adjust path as necessary
-
+const prisma = require("../../lib/prisma.js");
 exports.createDatastream = async (data) => {
   return prisma.datastream.create({
     data,
@@ -42,4 +41,17 @@ exports.getDatastreamsByTimestampRange = async (
       },
     },
   });
+};
+
+exports.calculateEnergyConsumption = async (deviceLabel) => {
+  const datastreams = await prisma.datastream.findMany({
+    where: { device_label: deviceLabel },
+    select: { power: true, timestamp: true },
+  });
+
+  const totalEnergyKWh = datastreams.reduce((total, { power }) => {
+    return total + (Number(power) / 1000) * (8 / 3600);
+  }, 0);
+
+  return totalEnergyKWh;
 };

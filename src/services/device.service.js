@@ -62,3 +62,16 @@ exports.listAllDevices = async () => {
     },
   });
 };
+
+exports.calculateEnergyConsumption = async (deviceLabel) => {
+  const datastreams = await prisma.datastream.findMany({
+    where: { device_label: deviceLabel },
+    select: { power: true, timestamp: true },
+  });
+
+  const totalEnergyKWh = datastreams.reduce((total, { power }) => {
+    return total + (Number(power) / 1000) * (8 / 3600);
+  }, 0);
+
+  return totalEnergyKWh;
+};

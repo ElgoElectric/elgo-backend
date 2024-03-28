@@ -10,7 +10,7 @@
     "migrate:deploy": "prisma migrate deploy",
     "studio": "prisma studio",
     "postinstall": "prisma generate",
-    "start":"node ./api/index.js"
+    "start": "node ./api/index.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "pg": "^8.11.3",
     "pnpm": "^8.15.5",
     "postgres": "^3.4.3",
+    "uuid": "^9.0.1",
     "vercel": "^32.3.0"
   },
   "devDependencies": {

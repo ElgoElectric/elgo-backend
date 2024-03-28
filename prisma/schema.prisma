@@ -48,8 +48,8 @@ model SagemakerAnomaly {
 }
 
 model User {
-  user_id  String   @id @db.VarChar(256)
+  user_id  String   @id @db.VarChar(256) @unique
   name     String   @db.VarChar(256)
-  email    String?  @db.VarChar(256)
+  email    String?  @db.VarChar(256) @unique
   devices  Device[]
 }

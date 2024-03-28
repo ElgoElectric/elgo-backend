@@ -43,7 +43,7 @@ exports.getDevicesByUserId = async (userId) => {
         select: {
           id: true,
           user_id: true,
-          email: true,
+          device_label: true,
           // Exclude related entities from the devices
           anomalies: false,
           datastreams: false,
