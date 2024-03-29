@@ -4,10 +4,6 @@
       {
         "src": "/api/index.js",
         "use": "@vercel/node"
-      },
-      {
-        "src": "/iot/mqtt_sub.js",
-        "use": "@vercel/node"
       }
     ],
     "routes": [

@@ -7,6 +7,7 @@ const sagemakeranomalyRouter = require("../src/routes/sagemakeranomaly.routes.js
 const app = express();
 const handler = require("../cron/cronAnomaly.js");
 const clearHandler = require("../cron/cronDelete.js");
+const { initializeIoTDevice } = require("../iot/mqtt_sub.js");
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -33,6 +34,14 @@ app.get("/", (req, res) => {
   console.info("INFO: Server Started Successfully");
   res.json({ "message:": "Welcome to Elgo API" });
 });
+
+initializeIoTDevice()
+  .then(() => {
+    console.log("IoT Device Initialization Complete.");
+  })
+  .catch((error) => {
+    console.error("IoT Device Initialization Failed:", error);
+  });
 
 // Error handling middleware
 app.use((error, req, res, next) => {

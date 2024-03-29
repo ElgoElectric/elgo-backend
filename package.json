@@ -10,7 +10,7 @@
     "migrate:deploy": "prisma migrate deploy",
     "studio": "prisma studio",
     "postinstall": "prisma generate",
-    "start": "node ./api/index.js & node ./iot/mqtt_sub.js"
+    "start": "node ./api/index.js"
   },
   "repository": {
     "type": "git",

@@ -85,7 +85,4 @@ async function initializeIoTDevice() {
   device.on("error", (error) => console.error("Connection Error:", error));
 }
 
-// Initialize the IoT device
-initializeIoTDevice().catch((error) =>
-  console.error("Initialization error:", error)
-);
+module.exports = { initializeIoTDevice };
