@@ -6,6 +6,7 @@ const datastreamRouter = require("../src/routes/datastream.routes.js");
 const sagemakeranomalyRouter = require("../src/routes/sagemakeranomaly.routes.js");
 const app = express();
 const handler = require("../cron/cronAnomaly.js");
+const clearHandler = require("../cron/cronDelete.js");
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -25,6 +26,7 @@ app.use("/devices", deviceRouter);
 app.use("/users", userRouter);
 app.use("/sagemakerAnomalies", sagemakeranomalyRouter);
 app.get("/anomalyChecker/cron", handler);
+app.get("/clearData/cron", clearHandler);
 app.use("/datastreams", datastreamRouter);
 
 app.get("/", (req, res) => {

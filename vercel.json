@@ -28,6 +28,10 @@
       {
         "path": "/anomalyChecker/cron",
         "schedule": "*/30 * * * *"
+      },
+      {
+        "path": "/clearData/cron",
+        "schedule": "0 0 0 */7 * *"
       }
     ]
   }
