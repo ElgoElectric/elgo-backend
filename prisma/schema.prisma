@@ -12,8 +12,8 @@ model Anomaly {
   device_label    String   @db.VarChar(256)
   timestamp_start DateTime @db.Timestamp(0)
   timestamp_end   DateTime? @db.Timestamp(0)
-  valid_anomaly   Boolean  // Added boolean field for valid anomaly indicator
-  action_taken    Boolean  // Added boolean field for action taken indicator
+  valid_anomaly   Boolean?  // Added boolean field for valid anomaly indicator
+  action_taken    Boolean?  // Added boolean field for action taken indicator
   device          Device   @relation(fields: [device_label], references: [device_label])
 }
 

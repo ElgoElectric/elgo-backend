@@ -79,7 +79,7 @@
                 "id": {
                   "example": "any"
                 },
-                "actionTaken": {
+                "action_taken": {
                   "example": "any"
                 }
               }
@@ -115,7 +115,7 @@
                 "id": {
                   "example": "any"
                 },
-                "validAnomaly": {
+                "valid_anomaly": {
                   "example": "any"
                 }
               }

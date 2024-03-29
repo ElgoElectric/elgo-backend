@@ -18,15 +18,15 @@ exports.listAnomaliesByDeviceLabel = async (deviceLabel) => {
 
 exports.updateAnomaly = async (
   id,
-  { timestampStart, timestampEnd, validAnomaly, actionTaken }
+  { timestampStart, timestampEnd, valid_anomaly, action_taken }
 ) => {
   return prisma.anomaly.update({
     where: { id },
     data: {
       timestamp_start: timestampStart,
       timestamp_end: timestampEnd,
-      valid_anomaly: validAnomaly,
-      action_taken: actionTaken,
+      valid_anomaly: valid_anomaly,
+      action_taken: action_taken,
     },
   });
 };
@@ -37,21 +37,21 @@ exports.deleteAnomaly = async (id) => {
   });
 };
 
-exports.updateValidAnomaly = async (id, validAnomaly) => {
+exports.updateValidAnomaly = async (id, valid_anomaly) => {
   return prisma.anomaly.update({
     where: { id },
     data: {
-      valid_anomaly: validAnomaly,
+      valid_anomaly: valid_anomaly,
     },
   });
 };
 
-exports.updateActionTaken = async (id, actionTaken) => {
+exports.updateActionTaken = async (id, action_taken) => {
   return prisma.anomaly.update({
     where: { id },
     data: {
-      action_taken: actionTaken,
-      valid_anomaly: actionTaken ? true : undefined, // Preserving original logic
+      action_taken: action_taken,
+      valid_anomaly: action_taken ? true : undefined, // Preserving original logic
     },
   });
 };

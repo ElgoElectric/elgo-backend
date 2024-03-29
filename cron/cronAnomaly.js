@@ -40,8 +40,8 @@ module.exports = async (req, res) => {
             device_label: device.device_label,
             timestamp_start: thirtyMinutesAgo,
             timestamp_end: new Date(),
-            valid_anomaly: true,
-            action_taken: false,
+            valid_anomaly: undefined,
+            action_taken: undefined,
           },
         });
         console.log(

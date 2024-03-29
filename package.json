@@ -24,6 +24,7 @@
   "homepage": "https://github.com/ElgoElectric/elgo-backend#readme",
   "dependencies": {
     "@prisma/client": "^5.11.0",
+    "@sendgrid/mail": "^8.1.1",
     "@vercel/node": "^3.0.24",
     "@vercel/postgres": "^0.7.2",
     "aws-iot-device-sdk": "^2.2.13",
