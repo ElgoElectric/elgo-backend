@@ -30,8 +30,8 @@
           "schedule": "*/30 * * * *"
         },
         {
-          "path": "/clearData/cron/cron",
-          "schedule": "0 0 * * 0"
+          "path": "/clearData/cron",
+          "schedule": "0 4 * * 6"
         }
       ]
   }
