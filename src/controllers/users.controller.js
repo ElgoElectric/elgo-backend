@@ -95,6 +95,21 @@ exports.deleteUser = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "❌ Error retrieving devices", error: error.message });
+      .json({ message: "❌ Error deleting user", error: error.message });
+  }
+};
+
+exports.getUserByEmail = async (req, res) => {
+  try {
+    const user = await userService.findUserByEmail(req.params.email);
+    if (user) {
+      res.json(user);
+    } else {
+      return res.status(404).json({ message: "❌ User does not exist." });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "❌ Error retreiving user", error: error.message });
   }
 };
