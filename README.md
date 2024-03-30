@@ -1,6 +1,3 @@
-Given the additional information about your `index.js` file, which includes details on route handling, middleware, and initialization of IoT devices, I'll refine the README to incorporate these specifics. This will help developers understand the architecture and functionalities of your application more clearly.
-
-```markdown
 # elgo-backend
 
 ## Overview
@@ -112,4 +109,4 @@ For bug reports and feature requests, use the [Issues](https://github.com/ElgoEl
 
 - **Repository**: [GitHub](https://github.com/ElgoElectric/elgo-backend)
 - **Live Application**: [elgo-backend.vercel.app](https://elgo-backend.vercel.app)
-```
+
