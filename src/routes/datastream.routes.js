@@ -13,5 +13,6 @@ router.get(
   "/:deviceLabel/energy",
   datastreamController.getEnergyConsumptionByDevice
 );
+router.get("/:deviceLabel", datastreamController.getDataStreamByDevice);
 
 module.exports = router;
