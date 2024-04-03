@@ -60,7 +60,7 @@ exports.getDatastreamByDeviceLabel = async (deviceLabel) => {
   let datastreams = await prisma.datastream.findMany({
     where: { device_label: deviceLabel },
     orderBy: { timestamp: 'desc' },
-    take: 1728
+    take: 5184
   });
 
   datastreams = datastreams.reverse();
