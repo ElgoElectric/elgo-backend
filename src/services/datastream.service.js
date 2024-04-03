@@ -58,7 +58,8 @@ exports.calculateEnergyConsumption = async (deviceLabel) => {
 
 exports.getDatastreamByDeviceLabel = async (deviceLabel) => {
   const datastreams = await prisma.datastream.findMany({
-    where: { device_label: deviceLabel }
+    where: { device_label: deviceLabel },
+    orderBy: { timestamp: 'asc' }
   });
 
   return datastreams;
