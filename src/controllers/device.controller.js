@@ -2,6 +2,7 @@ const deviceService = require("../services/device.service.js"); // Adjust the pa
 const AWS = require("aws-sdk");
 const awsIot = require("aws-iot-device-sdk");
 const path = require("path");
+let temp;
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -104,7 +105,7 @@ exports.listAllDevices = async (req, res) => {
 exports.setHVACTemp = async (req, res) => {
   try {
     // Assuming you've validated req.body and req.body.temp exists
-    const temp = req.body.temp;
+    temp = req.body.temp;
 
     // Prepare the payload
     const payload = JSON.stringify({ temp: temp });
@@ -114,6 +115,15 @@ exports.setHVACTemp = async (req, res) => {
       console.log(`Message published to elgo/v1/user/HVAC/setTemp`);
     });
     res.status(200).json({ message: "Published" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "❌ Failed to list devices", error: error.message });
+  }
+};
+exports.getHVACTemp = async (req, res) => {
+  try {
+    res.status(200).json({ temp: temp });
   } catch (error) {
     res
       .status(500)
