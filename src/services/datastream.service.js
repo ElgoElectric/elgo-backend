@@ -55,3 +55,15 @@ exports.calculateEnergyConsumption = async (deviceLabel) => {
 
   return totalEnergyKWh;
 };
+
+exports.getDatastreamByDeviceLabel = async (deviceLabel) => {
+  let datastreams = await prisma.datastream.findMany({
+    where: { device_label: deviceLabel },
+    orderBy: { timestamp: 'desc' },
+    take: 17280
+  });
+
+  datastreams = datastreams.reverse();
+
+  return datastreams;
+};

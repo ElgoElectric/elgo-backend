@@ -105,3 +105,18 @@ exports.getEnergyConsumptionByDevice = async (req, res) => {
     });
   }
 };
+
+exports.getDataStreamByDevice = async (req, res) => {
+  try {
+    const { deviceLabel } = req.params; // Extract deviceLabel from URL parameters
+    const datastreams = await datastreamService.getDatastreamByDeviceLabel(
+      deviceLabel
+    );
+    res.json({datastreams}); // Format output
+  } catch (error) {
+    res.status(500).json({
+      message: "❌ Error calculating energy consumption",
+      error: error.message,
+    });
+  }
+};
