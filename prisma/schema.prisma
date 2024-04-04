@@ -42,8 +42,8 @@ model SagemakerAnomaly {
   device_label  String   @db.VarChar(256)
   power         Decimal
   timestamp     DateTime @db.Timestamp(0)
-  isofAnomaly   Boolean
-  lstmAnomaly   Boolean
+  isofAnomaly   Boolean?
+  lstmAnomaly   Boolean?
   device        Device   @relation(fields: [device_label], references: [device_label])
 }
 

@@ -9,5 +9,6 @@ router.get("/:deviceLabel", deviceController.getDeviceByLabel); // Get a specifi
 router.patch("/:deviceLabel", deviceController.updateDevice); // Update a device by device label
 router.delete("/:deviceLabel", deviceController.deleteDevice); // Delete a device by device label
 router.get("/", deviceController.listAllDevices); // List all devices
+router.post("/hvac/setTemp", deviceController.setHVACTemp); // List all devices
 
 module.exports = router;
