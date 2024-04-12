@@ -1,27 +1,77 @@
 const deviceService = require("../services/device.service.js"); // Adjust the path as needed
 const AWS = require("aws-sdk");
 const awsIot = require("aws-iot-device-sdk");
-const path = require("path");
+const { Mutex } = require("async-mutex");
 let temp;
 
+// Setup AWS SDK
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION, // Make sure to set this to your region
+  region: process.env.AWS_REGION,
 });
-const iot_connector = awsIot.device({
-  keyPath: path.join(
-    __dirname,
-    "device_certs/6024c861f896c261591a1696f27f858054aee5ddafaa47e36ae42065258c2f62-private.pem.key"
-  ),
-  certPath: path.join(
-    __dirname,
-    "device_certs/6024c861f896c261591a1696f27f858054aee5ddafaa47e36ae42065258c2f62-certificate.pem.crt"
-  ),
-  caPath: path.join(__dirname, "device_certs/AmazonRootCA1.pem"),
-  clientId: "iotconsole-elgo-client-06",
-  host: "a1smcl0622itjw-ats.iot.us-east-1.amazonaws.com",
-});
+
+const s3 = new AWS.S3();
+const mutex = new Mutex();
+
+// Function to download a file from S3
+async function downloadFromS3(bucket, key) {
+  const params = {
+    Bucket: bucket,
+    Key: key,
+  };
+  return new Promise((resolve, reject) => {
+    s3.getObject(params, (err, data) => {
+      if (err) reject(err);
+      else resolve(data.Body);
+    });
+  });
+}
+
+async function initIoTDevice() {
+  try {
+    const privateKey = await downloadFromS3(
+      process.env.AWS_S3_BUCKET,
+      process.env.AWS_S3_PKEY
+    );
+    const certificate = await downloadFromS3(
+      process.env.AWS_S3_BUCKET,
+      process.env.AWS_S3_CERT
+    );
+    const caCertificate = await downloadFromS3(
+      process.env.AWS_S3_BUCKET,
+      process.env.AWS_S3_CA1
+    );
+
+    const iot_connector = awsIot.device({
+      privateKey: Buffer.from(privateKey),
+      clientCert: Buffer.from(certificate),
+      caCert: Buffer.from(caCertificate),
+      clientId: "iotconsole-elgo-client-06",
+      host: process.env.AWS_IOT_ENDPOINT,
+    });
+
+    return iot_connector;
+  } catch (error) {
+    console.error("Failed to initialize IoT Device:", error);
+    throw error;
+  }
+}
+
+async function publishTemperatureUpdate(temp) {
+  try {
+    const payload = JSON.stringify({ temp: temp });
+    const iot_connector = await initIoTDevice();
+    console.log("IoT Device initialized successfully");
+
+    // Now that we have the iot_connector, we can publish the message
+    iot_connector.publish("elgo/v1/device/hvac/setTemp", payload, () => {
+      console.log(`Message published to elgo/v1/device/hvac/setTemp`);
+    });
+  } catch (error) {
+    console.error("Initialization failed:", error);
+  }
+}
 
 exports.createDevice = async (req, res) => {
   try {
@@ -103,30 +153,34 @@ exports.listAllDevices = async (req, res) => {
 };
 
 exports.setHVACTemp = async (req, res) => {
+  const release = await mutex.acquire(); // Acquire the lock
   try {
-    // Assuming you've validated req.body and req.body.temp exists
-    temp = req.body.temp;
-
-    // Prepare the payload
-    const payload = JSON.stringify({ temp: temp });
-
-    // Publish a message to the specified MQTT topic
-    iot_connector.publish("elgo/v1/device/hvac/setTemp", payload, () => {
-      console.log(`Message published to elgo/v1/user/HVAC/setTemp`);
-    });
+    temp = req.body.temp; // Assuming temp is validated and exists
+    await publishTemperatureUpdate(temp);
     res.status(200).json({ message: "Published" });
   } catch (error) {
     res
       .status(500)
-      .json({ message: "❌ Failed to list devices", error: error.message });
+      .json({ message: "❌ Failed to set temperature", error: error.message });
+  } finally {
+    release(); // Always release the lock, even if an error occurs
   }
 };
+
 exports.getHVACTemp = async (req, res) => {
+  const release = await mutex.acquire();
   try {
+    res.set({
+      "Cache-Control": "no-store, max-age=0",
+      Pragma: "no-cache",
+      Expires: "0",
+    });
     res.status(200).json({ temp: temp });
   } catch (error) {
     res
       .status(500)
-      .json({ message: "❌ Failed to list devices", error: error.message });
+      .json({ message: "❌ Failed to get temperature", error: error.message });
+  } finally {
+    release(); // Always release the lock, even if an error occurs
   }
 };
